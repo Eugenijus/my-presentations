@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SDD Repos — Star Ranking May 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg:        #f5f2eb;
+    --surface:   #ffffff;
+    --ink:       #1a1814;
+    --muted:     #7a7570;
+    --border:    #e0dbd0;
+    --accent:    #c8410a;
+    --gold:      #b8860b;
+    --teal:      #0f6e56;
+    --purple:    #534ab7;
+    --row-hover: #faf8f3;
+  }
+
+  body {
+    background: var(--bg);
+    font-family: 'Fraunces', Georgia, serif;
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 48px 24px 64px;
+  }
+
+  header {
+    max-width: 900px;
+    margin: 0 auto 40px;
+  }
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--muted);
+  }
+
+  .table-wrap {
+    max-width: 900px;
+    margin: 0 auto;
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow: hidden;
+    box-shadow: 0 2px 24px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04);
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+  }
+
+  thead tr {
+    background: var(--ink);
+  }
+
+  th {
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: #c8c0b0;
+    padding: 14px 20px;
+    text-align: left;
+    white-space: nowrap;
+  }
+
+  th:first-child { width: 40px; text-align: center; }
+  th.right { text-align: right; }
+
+  tbody tr {
+    border-bottom: 1px solid var(--border);
+    transition: background 0.15s ease;
+  }
+
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--row-hover); }
+
+  td {
+    padding: 18px 20px;
+    vertical-align: middle;
+  }
+
+  td:first-child {
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    width: 40px;
+  }
+
+  .rank-1 td:first-child { color: var(--gold); font-weight: 500; }
+  .rank-2 td:first-child { color: #999; font-weight: 500; }
+  .rank-3 td:first-child { color: #b07030; font-weight: 500; }
+
+  .repo-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    color: var(--ink);
+    display: block;
+    margin-bottom: 3px;
+  }
+
+  .repo-name a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+  }
+  .repo-name a:hover { border-bottom-color: var(--accent); }
+
+  .repo-desc {
+    font-size: 12.5px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--muted);
+  }
+
+  .stars {
+    font-family: 'DM Mono', monospace;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--ink);
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .star-icon { color: var(--gold); margin-right: 3px; font-size: 12px; }
+
+  .bar-cell { width: 160px; }
+
+  .bar-bg {
+    background: #ede8df;
+    border-radius: 2px;
+    height: 6px;
+    overflow: hidden;
+  }
+
+  .bar-fill {
+    height: 100%;
+    border-radius: 2px;
+    background: var(--accent);
+    transition: width 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+  }
+
+  .velocity {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--teal);
+    text-align: right;
+    white-space: nowrap;
+  }
+
+  .badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    border-radius: 2px;
+    white-space: nowrap;
+  }
+
+  .badge-fastest  { background: #e8f5f0; color: var(--teal);   border: 1px solid #a8dcc8; }
+  .badge-corporate{ background: #fff3e8; color: var(--accent);  border: 1px solid #f5c8a0; }
+  .badge-steady   { background: #f0eeff; color: var(--purple); border: 1px solid #c4bef5; }
+  .badge-accel    { background: #fef9e8; color: var(--gold);   border: 1px solid #e8d48a; }
+  .badge-niche    { background: #f4f4f4; color: #888;          border: 1px solid #ddd; }
+
+  .launched {
+    font-family: 'DM Mono', monospace;
+    font-size: 11.5px;
+    color: var(--muted);
+  }
+
+  .note {
+    max-width: 900px;
+    margin: 20px auto 0;
+    font-size: 12px;
+    font-style: italic;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+  }
+
+  /* fade-in on load */
+  tbody tr {
+    opacity: 0;
+    transform: translateY(6px);
+    animation: fadeUp 0.35s ease forwards;
+  }
+  tbody tr:nth-child(1) { animation-delay: 0.05s; }
+  tbody tr:nth-child(2) { animation-delay: 0.10s; }
+  tbody tr:nth-child(3) { animation-delay: 0.15s; }
+  tbody tr:nth-child(4) { animation-delay: 0.20s; }
+  tbody tr:nth-child(5) { animation-delay: 0.25s; }
+  tbody tr:nth-child(6) { animation-delay: 0.30s; }
+
+  @keyframes fadeUp {
+    to { opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">Spec-Driven Development · GitHub Rankings</p>
+  <h1>Which SDD repo<br>is growing fastest?</h1>
+  <p class="subtitle">Stars, velocity, and momentum — updated May 2026</p>
+</header>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Repository</th>
+        <th>Launched</th>
+        <th class="right">Stars</th>
+        <th class="bar-cell"></th>
+        <th class="right">Stars / day</th>
+        <th>Signal</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr class="rank-2">
+        <td>1</td>
+        <td>
+          <span class="repo-name"><a href="https://github.com/github/spec-kit" target="_blank">github/spec-kit</a></span>
+          <span class="repo-desc">Official GitHub SDD toolkit — greenfield & structured</span>
+        </td>
+        <td class="launched">Sep 2025</td>
+        <td class="stars"><span class="star-icon">★</span>93k</td>
+        <td class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:100%; background:#b8860b;"></div></div></td>
+        <td class="velocity">~388 / day</td>
+        <td><span class="badge badge-corporate">Corporate spike</span></td>
+      </tr>
+
+      <tr class="rank-1">
+        <td>2</td>
+        <td>
+          <span class="repo-name"><a href="https://github.com/gsd-build/get-shit-done" target="_blank">gsd-build/get-shit-done</a></span>
+          <span class="repo-desc">Context engineering + spec-driven layer for Claude Code</span>
+        </td>
+        <td class="launched">Dec 2025</td>
+        <td class="stars"><span class="star-icon">★</span>61k</td>
+        <td class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:66%; background:#c8410a;"></div></div></td>
+        <td class="velocity" style="color:#c8410a; font-weight:500;">~407 / day 🏆</td>
+        <td><span class="badge badge-fastest">Fastest organic</span></td>
+      </tr>
+
+      <tr class="rank-3">
+        <td>3</td>
+        <td>
+          <span class="repo-name"><a href="https://github.com/bmad-code-org/BMAD-METHOD" target="_blank">bmad-code-org/BMAD-METHOD</a></span>
+          <span class="repo-desc">Multi-agent agile framework — full SDLC orchestration</span>
+        </td>
+        <td class="launched">Apr 2025</td>
+        <td class="stars"><span class="star-icon">★</span>43k</td>
+        <td class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:46%;"></div></div></td>
+        <td class="velocity">~110 / day</td>
+        <td><span class="badge badge-steady">Steady compounder</span></td>
+      </tr>
+
+      <tr>
+        <td>4</td>
+        <td>
+          <span class="repo-name"><a href="https://github.com/Fission-AI/OpenSpec" target="_blank">Fission-AI/OpenSpec</a></span>
+          <span class="repo-desc">Brownfield-first, delta-spec approach — lighter than spec-kit</span>
+        </td>
+        <td class="launched">Jan 2025</td>
+        <td class="stars"><span class="star-icon">★</span>30k</td>
+        <td class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:32%;"></div></div></td>
+        <td class="velocity">~63 / day</td>
+        <td><span class="badge badge-accel">Accelerating</span></td>
+      </tr>
+
+      <tr>
+        <td>5</td>
+        <td>
+          <span class="repo-name"><a href="https://github.com/gotalab/cc-sdd" target="_blank">gotalab/cc-sdd</a></span>
+          <span class="repo-desc">Kiro-style requirements → design → tasks workflow</span>
+        </td>
+        <td class="launched">Aug 2025</td>
+        <td class="stars"><span class="star-icon">★</span>2.8k</td>
+        <td class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:3%;"></div></div></td>
+        <td class="velocity">~10 / day</td>
+        <td><span class="badge badge-niche">Niche</span></td>
+      </tr>
+
+      <tr>
+        <td>6</td>
+        <td>
+          <span class="repo-name"><a href="https://github.com/Pimzino/claude-code-spec-workflow" target="_blank">Pimzino/claude-code-spec-workflow</a></span>
+          <span class="repo-desc">Claude Code-specific spec workflow, minimal overhead</span>
+        </td>
+        <td class="launched">2025</td>
+        <td class="stars"><span class="star-icon">★</span>~400</td>
+        <td class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:1%;"></div></div></td>
+        <td class="velocity">~1 / day</td>
+        <td><span class="badge badge-niche">Niche</span></td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<p class="note">* Stars/day calculated from launch date to May 2026. GSD ranks #1 on velocity despite lower total stars — purely organic growth with no corporate backing.</p>
+
+</body>
+</html>
