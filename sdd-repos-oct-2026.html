@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>SDD Repos — Star Ranking October 2026</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,700;1,9..144,300&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    color-scheme: light dark;
+    --bg:        #f5f2eb;
+    --surface:   #ffffff;
+    --ink:       #1a1814;
+    --muted:     #7a7570;
+    --border:    #e0dbd0;
+    --accent:    #c8410a;
+    --gold:      #b8860b;
+    --teal:      #0f6e56;
+    --purple:    #534ab7;
+    --row-hover: #faf8f3;
+    --head-bg:   #1a1814;
+    --head-ink:  #c8c0b0;
+    --bar-bg:    #ede8df;
+    --silver:    #8a8a8a;
+    --bronze:    #b07030;
+    --callout-bg:#fbf8f1;
+
+    --b-green-bg:#e8f5f0; --b-green-ink:#0f6e56; --b-green-bd:#a8dcc8;
+    --b-orange-bg:#fff3e8; --b-orange-ink:#c8410a; --b-orange-bd:#f5c8a0;
+    --b-purple-bg:#f0eeff; --b-purple-ink:#534ab7; --b-purple-bd:#c4bef5;
+    --b-gold-bg:#fef9e8; --b-gold-ink:#8a6508; --b-gold-bd:#e8d48a;
+    --b-grey-bg:#f4f4f4; --b-grey-ink:#6b6b6b; --b-grey-bd:#ddd;
+  }
+
+  @media (prefers-color-scheme: dark) {
+    :root {
+      --bg:        #14120f;
+      --surface:   #1e1b16;
+      --ink:       #efe9dc;
+      --muted:     #a39d92;
+      --border:    #342f28;
+      --accent:    #ef7a45;
+      --gold:      #d9a82a;
+      --teal:      #4fc3a1;
+      --purple:    #a69cf5;
+      --row-hover: #26221c;
+      --head-bg:   #2a261f;
+      --head-ink:  #cfc7b6;
+      --bar-bg:    #2f2b24;
+      --silver:    #b5b5b5;
+      --bronze:    #d19155;
+      --callout-bg:#1a1814;
+
+      --b-green-bg:#12302a; --b-green-ink:#6fd8b8; --b-green-bd:#1f5a4a;
+      --b-orange-bg:#3a2316; --b-orange-ink:#f19a6c; --b-orange-bd:#6a3b20;
+      --b-purple-bg:#25213f; --b-purple-ink:#b9b0ff; --b-purple-bd:#443d78;
+      --b-gold-bg:#35290d; --b-gold-ink:#e6bf55; --b-gold-bd:#65501a;
+      --b-grey-bg:#2a2824; --b-grey-ink:#a8a299; --b-grey-bd:#403c35;
+    }
+  }
+
+  body {
+    background: var(--bg);
+    font-family: 'Fraunces', Georgia, serif;
+    color: var(--ink);
+    min-height: 100vh;
+    padding: 48px 24px 64px;
+    line-height: 1.5;
+  }
+
+  header, .callout, .table-wrap, .section-title, .note {
+    max-width: 1040px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  header { margin-bottom: 32px; }
+
+  .eyebrow {
+    font-family: 'DM Mono', monospace;
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--accent);
+    margin-bottom: 12px;
+  }
+
+  h1 {
+    font-size: clamp(28px, 5vw, 48px);
+    font-weight: 700;
+    line-height: 1.1;
+    letter-spacing: -0.02em;
+    margin-bottom: 10px;
+  }
+
+  .subtitle {
+    font-size: 16px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--muted);
+  }
+
+  /* what changed */
+  .callout {
+    background: var(--callout-bg);
+    border: 1px solid var(--border);
+    border-left: 3px solid var(--accent);
+    border-radius: 4px;
+    padding: 20px 24px;
+    margin-bottom: 36px;
+  }
+  .callout h2 {
+    font-size: 15px;
+    font-weight: 700;
+    margin-bottom: 10px;
+  }
+  .callout ul { list-style: none; }
+  .callout li {
+    font-size: 14px;
+    font-weight: 300;
+    padding: 5px 0;
+    max-width: 78ch;
+  }
+  .callout li strong { font-weight: 700; }
+
+  .section-title {
+    font-size: 20px;
+    font-weight: 700;
+    letter-spacing: -0.01em;
+    margin-top: 48px;
+    margin-bottom: 4px;
+  }
+  .section-sub {
+    max-width: 1040px;
+    margin: 0 auto 14px;
+    font-size: 13px;
+    font-style: italic;
+    font-weight: 300;
+    color: var(--muted);
+  }
+
+  .table-wrap {
+    background: var(--surface);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    overflow-x: auto;
+    box-shadow: 0 2px 24px rgba(0,0,0,0.06), 0 0 0 1px rgba(0,0,0,0.04);
+  }
+
+  table { width: 100%; border-collapse: collapse; min-width: 860px; }
+
+  thead tr { background: var(--head-bg); }
+
+  th {
+    font-family: 'DM Mono', monospace;
+    font-size: 10.5px;
+    font-weight: 500;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--head-ink);
+    padding: 14px 16px;
+    text-align: left;
+    white-space: nowrap;
+  }
+  th:first-child { width: 40px; text-align: center; }
+  th.right { text-align: right; }
+
+  tbody tr { border-bottom: 1px solid var(--border); transition: background 0.15s ease; }
+  tbody tr:last-child { border-bottom: none; }
+  tbody tr:hover { background: var(--row-hover); }
+
+  td { padding: 16px; vertical-align: middle; }
+
+  td:first-child {
+    text-align: center;
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    color: var(--muted);
+    width: 40px;
+  }
+
+  .rank-1 td:first-child { color: var(--gold); font-weight: 500; }
+  .rank-2 td:first-child { color: var(--silver); font-weight: 500; }
+  .rank-3 td:first-child { color: var(--bronze); font-weight: 500; }
+
+  tr.archived .repo-name, tr.archived .repo-desc, tr.archived .stars { opacity: 0.62; }
+
+  .repo-name {
+    font-family: 'DM Mono', monospace;
+    font-size: 13px;
+    font-weight: 500;
+    display: block;
+    margin-bottom: 3px;
+  }
+  .repo-name a {
+    color: inherit;
+    text-decoration: none;
+    border-bottom: 1px solid transparent;
+    transition: border-color 0.15s;
+  }
+  .repo-name a:hover, .repo-name a:focus-visible { border-bottom-color: var(--accent); outline: none; }
+
+  .repo-desc {
+    font-size: 12.5px;
+    font-weight: 300;
+    font-style: italic;
+    color: var(--muted);
+    display: block;
+    max-width: 44ch;
+  }
+
+  .stars {
+    font-family: 'DM Mono', monospace;
+    font-size: 15px;
+    font-weight: 500;
+    text-align: right;
+    white-space: nowrap;
+  }
+  .star-icon { color: var(--gold); margin-right: 3px; font-size: 12px; }
+
+  .bar-cell { width: 130px; }
+  .bar-bg { background: var(--bar-bg); border-radius: 2px; height: 6px; overflow: hidden; }
+  .bar-fill { height: 100%; border-radius: 2px; background: var(--accent); }
+
+  .velocity {
+    font-family: 'DM Mono', monospace;
+    font-size: 12px;
+    color: var(--muted);
+    text-align: right;
+    white-space: nowrap;
+  }
+  .velocity small { display: block; font-size: 10px; color: var(--muted); opacity: 0.85; margin-top: 2px; }
+  .velocity.recent { color: var(--teal); font-weight: 500; }
+  .velocity.top { color: var(--accent); font-weight: 500; }
+
+  .launched { font-family: 'DM Mono', monospace; font-size: 11.5px; color: var(--muted); white-space: nowrap; }
+
+  .badge {
+    display: inline-block;
+    font-family: 'DM Mono', monospace;
+    font-size: 9.5px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    text-transform: uppercase;
+    padding: 3px 7px;
+    border-radius: 2px;
+    white-space: nowrap;
+    border: 1px solid;
+  }
+  .badge-fastest  { background: var(--b-green-bg);  color: var(--b-green-ink);  border-color: var(--b-green-bd); }
+  .badge-corporate{ background: var(--b-orange-bg); color: var(--b-orange-ink); border-color: var(--b-orange-bd); }
+  .badge-steady   { background: var(--b-purple-bg); color: var(--b-purple-ink); border-color: var(--b-purple-bd); }
+  .badge-accel    { background: var(--b-gold-bg);   color: var(--b-gold-ink);   border-color: var(--b-gold-bd); }
+  .badge-niche    { background: var(--b-grey-bg);   color: var(--b-grey-ink);   border-color: var(--b-grey-bd); }
+
+  .delta { font-family: 'DM Mono', monospace; font-size: 12px; text-align: right; white-space: nowrap; color: var(--teal); }
+
+  .note {
+    margin-top: 24px;
+    font-size: 12px;
+    font-style: italic;
+    color: var(--muted);
+    font-family: 'DM Mono', monospace;
+    line-height: 1.7;
+  }
+  .note p + p { margin-top: 8px; }
+
+  /* single load-in */
+  tbody tr { opacity: 0; transform: translateY(6px); animation: fadeUp 0.35s ease forwards; }
+  tbody tr:nth-child(1) { animation-delay: 0.05s; }
+  tbody tr:nth-child(2) { animation-delay: 0.10s; }
+  tbody tr:nth-child(3) { animation-delay: 0.15s; }
+  tbody tr:nth-child(4) { animation-delay: 0.20s; }
+  tbody tr:nth-child(5) { animation-delay: 0.25s; }
+  tbody tr:nth-child(6) { animation-delay: 0.30s; }
+  tbody tr:nth-child(7) { animation-delay: 0.35s; }
+  @keyframes fadeUp { to { opacity: 1; transform: none; } }
+
+  @media (prefers-reduced-motion: reduce) {
+    tbody tr { animation: none; opacity: 1; transform: none; }
+  }
+</style>
+</head>
+<body>
+
+<header>
+  <p class="eyebrow">Spec-Driven Development · GitHub Rankings</p>
+  <h1>Which SDD repo<br>is growing fastest?</h1>
+  <p class="subtitle">Stars, velocity, and momentum — updated October 19, 2026 (previous edition: May 2026)</p>
+</header>
+
+<section class="callout" aria-labelledby="changes-title">
+  <h2 id="changes-title">What changed since May</h2>
+  <ul>
+    <li><strong>The fastest repos are now skills frameworks, not SDD kits.</strong> mattpocock/skills adds roughly 1,470 stars a day and obra/superpowers roughly 600. Both sit close to 300k stars and both are SDD-adjacent rather than classic spec toolkits.</li>
+    <li><strong>Spec Kit is the fastest dedicated SDD toolkit</strong>, up from 93k to 141.7k at about 157 stars a day over the last week.</li>
+    <li><strong>GSD changed homes.</strong> The original repo was archived on June 26 with about 64.4k stars frozen. Development continues as open-gsd/gsd-core, now at 10.7k.</li>
+    <li><strong>Corrections to the May edition:</strong> OpenSpec launched in August 2025 (not January), and Pimzino's repo has about 3.8k stars (not ~400). It is now legacy, superseded by spec-workflow-mcp.</li>
+  </ul>
+</section>
+
+<div class="table-wrap">
+  <table>
+    <caption style="position:absolute;left:-9999px">SDD repositories ranked by GitHub stars, October 2026</caption>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Repository</th>
+        <th>Launched</th>
+        <th class="right">Stars</th>
+        <th class="bar-cell"></th>
+        <th class="right">Avg / day</th>
+        <th class="right">Recent pace</th>
+        <th>Signal</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr class="rank-1">
+        <td>1</td>
+        <td>
+          <span class="repo-name"><a href="https://github.com/obra/superpowers" target="_blank" rel="noopener">obra/superpowers</a></span>
+          <span class="repo-desc">Skills framework with a hard-gated brainstorm → spec → plan pipeline <em>(SDD-adjacent)</em></span>
+        </td>
+        <td class="launched">Oct 2025</td>
+        <td class="stars"><span class="star-icon">★</span>301.7k</td>
+        <td class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:100%; background:var(--gold);"></div></div></td>
+        <td class="velocity">~805</td>
+        <td class="velocity recent">~600 / day<small>last 7 days</small></td>
+        <td><span class="badge badge-accel">Biggest overall</span></td>
+      </tr>
+
+      <tr class="rank-2">
+        <td>2</td>
+        <td>
+          <span class="repo-name"><a href="https://github.com/mattpocock/skills" target="_blank" rel="noopener">mattpocock/skills</a></span>
+          <span class="repo-desc">Composable "grill-me" skills: interview → spec → tickets → TDD <em>(SDD-adjacent)</em></span>
+        </td>
+        <td class="launched">Feb 2026</td>
+        <td class="stars"><span class="star-icon">★</span>296.5k</td>
+        <td class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:98%;"></div></div></td>
+        <td class="velocity">~1,140</td>
+        <td class="velocity top">~1,470 / day 🏆<small>last 7 days</small></td>
+        <td><span class="badge badge-fastest">Fastest overall</span></td>
+      </tr>
+
+      <tr class="rank-3">
+        <td>3</td>
+        <td>
+          <span class="repo-name"><a href="https://github.com/github/spec-kit" target="_blank" rel="noopener">github/spec-kit</a></span>
+          <span class="repo-desc">Official GitHub SDD toolkit — greenfield and structured, 40+ agents supported</span>
+        </td>
+        <td class="launched">Aug 2025</td>
+        <td class="stars"><span class="star-icon">★</span>141.7k</td>
+        <td class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:47%;"></div></div></td>
+        <td class="velocity">~335</td>
+        <td class="velocity recent">~157 / day<small>last 7 days</small></td>
+        <td><span class="badge badge-fastest">Fastest SDD toolkit</span></td>
+      </tr>
+
+      <tr>
+        <td>4</td>
+        <td>
+          <span class="repo-name"><a href="https://github.com/Fission-AI/OpenSpec" target="_blank" rel="noopener">Fission-AI/OpenSpec</a></span>
+          <span class="repo-desc">Brownfield-first, change-folder delta specs — lighter than spec-kit</span>
+        </td>
+        <td class="launched">Aug 2025</td>
+        <td class="stars"><span class="star-icon">★</span>72.3k</td>
+        <td class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:24%;"></div></div></td>
+        <td class="velocity">~170</td>
+        <td class="velocity recent">~113 / day<small>since Aug 4</small></td>
+        <td><span class="badge badge-steady">Steady climber</span></td>
+      </tr>
+
+      <tr class="archived">
+        <td>5</td>
+        <td>
+          <span class="repo-name"><a href="https://github.com/gsd-build/get-shit-done" target="_blank" rel="noopener">gsd-build/get-shit-done</a></span>
+          <span class="repo-desc">Original GSD. Archived Jun 26, 2026; read-only, stars frozen</span>
+        </td>
+        <td class="launched">Dec 2025</td>
+        <td class="stars"><span class="star-icon">★</span>64.4k</td>
+        <td class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:21%; background:var(--muted);"></div></div></td>
+        <td class="velocity">~330<small>Dec–Jun</small></td>
+        <td class="velocity">frozen</td>
+        <td><span class="badge badge-niche">Archived</span></td>
+      </tr>
+
+      <tr>
+        <td>6</td>
+        <td>
+          <span class="repo-name"><a href="https://github.com/bmad-code-org/BMAD-METHOD" target="_blank" rel="noopener">bmad-code-org/BMAD-METHOD</a></span>
+          <span class="repo-desc">Multi-agent agile framework — full lifecycle from ideation to retrospective</span>
+        </td>
+        <td class="launched">Apr 2025</td>
+        <td class="stars"><span class="star-icon">★</span>54.3k</td>
+        <td class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:18%;"></div></div></td>
+        <td class="velocity">~100</td>
+        <td class="velocity recent">~70 / day<small>since May report (est.)</small></td>
+        <td><span class="badge badge-steady">Steady compounder</span></td>
+      </tr>
+
+      <tr>
+        <td>7</td>
+        <td>
+          <span class="repo-name"><a href="https://github.com/open-gsd/gsd-core" target="_blank" rel="noopener">open-gsd/gsd-core</a></span>
+          <span class="repo-desc">Community continuation of GSD: fresh-context subagents, 14 runtimes</span>
+        </td>
+        <td class="launched">May 2026</td>
+        <td class="stars"><span class="star-icon">★</span>10.7k</td>
+        <td class="bar-cell"><div class="bar-bg"><div class="bar-fill" style="width:4%;"></div></div></td>
+        <td class="velocity">~70</td>
+        <td class="velocity recent">~42 / day<small>since Jul 23</small></td>
+        <td><span class="badge badge-corporate">Successor</span></td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<h2 class="section-title">More frameworks worth tracking</h2>
+<p class="section-sub">Smaller or newer entries added in this edition. Star counts are snapshots from the SDD Observatory tracker.</p>
+
+<div class="table-wrap">
+  <table>
+    <thead>
+      <tr>
+        <th>#</th>
+        <th>Repository</th>
+        <th class="right">Stars</th>
+        <th class="right">vs. May</th>
+        <th>Signal</th>
+      </tr>
+    </thead>
+    <tbody>
+
+      <tr>
+        <td>8</td>
+        <td>
+          <span class="repo-name"><a href="https://github.com/buildermethods/agent-os" target="_blank" rel="noopener">buildermethods/agent-os</a></span>
+          <span class="repo-desc">Standards-first: extracts your codebase conventions and injects them into agent context</span>
+        </td>
+        <td class="stars"><span class="star-icon">★</span>5.5k</td>
+        <td class="delta">new</td>
+        <td><span class="badge badge-niche">Emerging</span></td>
+      </tr>
+
+      <tr>
+        <td>9</td>
+        <td>
+          <span class="repo-name"><a href="https://github.com/awslabs/aidlc-workflows" target="_blank" rel="noopener">awslabs/aidlc-workflows</a></span>
+          <span class="repo-desc">AWS AI-DLC: gated, adaptive lifecycle from intent to operations, harness-neutral</span>
+        </td>
+        <td class="stars"><span class="star-icon">★</span>5.4k</td>
+        <td class="delta">new</td>
+        <td><span class="badge badge-corporate">Corporate</span></td>
+      </tr>
+
+      <tr>
+        <td>10</td>
+        <td>
+          <span class="repo-name"><a href="https://github.com/Pimzino/claude-code-spec-workflow" target="_blank" rel="noopener">Pimzino/claude-code-spec-workflow</a></span>
+          <span class="repo-desc">Claude Code spec workflow. Now legacy; author moved to spec-workflow-mcp (~4.3k)</span>
+        </td>
+        <td class="stars"><span class="star-icon">★</span>~3.8k</td>
+        <td class="delta">corrected</td>
+        <td><span class="badge badge-niche">Legacy</span></td>
+      </tr>
+
+      <tr>
+        <td>11</td>
+        <td>
+          <span class="repo-name"><a href="https://github.com/gemini-cli-extensions/conductor" target="_blank" rel="noopener">gemini-cli-extensions/conductor</a></span>
+          <span class="repo-desc">Track-based spec → plan → implement → review loop with durable product context</span>
+        </td>
+        <td class="stars"><span class="star-icon">★</span>3.8k</td>
+        <td class="delta">new</td>
+        <td><span class="badge badge-niche">Emerging</span></td>
+      </tr>
+
+      <tr>
+        <td>12</td>
+        <td>
+          <span class="repo-name"><a href="https://github.com/gotalab/cc-sdd" target="_blank" rel="noopener">gotalab/cc-sdd</a></span>
+          <span class="repo-desc">Kiro-style requirements → design → tasks, installed as skills in eight agents</span>
+        </td>
+        <td class="stars"><span class="star-icon">★</span>3.7k</td>
+        <td class="delta">+0.9k</td>
+        <td><span class="badge badge-niche">Niche</span></td>
+      </tr>
+
+      <tr>
+        <td>13</td>
+        <td>
+          <span class="repo-name"><a href="https://github.com/sandeco/reversa" target="_blank" rel="noopener">sandeco/reversa</a></span>
+          <span class="repo-desc">Reverse-engineers legacy code into confidence-scored specs before agents change it</span>
+        </td>
+        <td class="stars"><span class="star-icon">★</span>1.8k</td>
+        <td class="delta">new</td>
+        <td><span class="badge badge-niche">Niche</span></td>
+      </tr>
+
+      <tr>
+        <td>14</td>
+        <td>
+          <span class="repo-name"><a href="https://github.com/Priivacy-ai/spec-kitty" target="_blank" rel="noopener">Priivacy-ai/spec-kitty</a></span>
+          <span class="repo-desc">Spec Kit descendant with work packages, isolated worktrees and review state</span>
+        </td>
+        <td class="stars"><span class="star-icon">★</span>1.7k</td>
+        <td class="delta">new</td>
+        <td><span class="badge badge-niche">Niche</span></td>
+      </tr>
+
+    </tbody>
+  </table>
+</div>
+
+<div class="note">
+  <p>* Stars as of Oct 17–19, 2026, from star-history.com, SDD Observatory and Trendshift. Avg / day = stars divided by days since the repo was created (launch dates are approximate to the month). Recent pace uses the window shown under each figure; windows differ because only some repos publish a 7-day delta, so compare them as rough magnitudes.</p>
+  <p>* The archived GSD star count differs by a few hundred between sources (64.4k–64.8k). Superpowers and mattpocock/skills never describe themselves as spec-driven; they are included because they enforce human-approved spec and plan artifacts before code. "vs. May" is shown only where the May edition listed the repo.</p>
+</div>
+
+</body>
+</html>
